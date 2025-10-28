@@ -1,0 +1,22 @@
+body {
+  background: linear-gradient(135deg, #f9f9f9, #eaf4ff);
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.app-bg {
+  background-color: #fdfdfd;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f5faff;
+  transition: background-color 0.2s ease;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+h1, h4 {
+  font-weight: 600;
+}
