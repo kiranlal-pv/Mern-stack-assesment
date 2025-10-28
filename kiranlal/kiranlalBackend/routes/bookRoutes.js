@@ -9,7 +9,9 @@ router.post("/", async (req, res) => {
     const { title, author, genre, price, stock, publishedYear } = req.body;
 
     if (!title || !author || !genre || !price) {
-      return res.status(400).json({ message: "All required fields must be provided" });
+      return res
+        .status(400)
+        .json({ message: "All required fields must be provided" });
     }
 
     const newBook = new Book({
@@ -46,7 +48,6 @@ router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const { title, author, genre, price, stock, publishedYear } = req.body;
 
-    // Find and update the book
     const updatedBook = await Book.findByIdAndUpdate(
       id,
       { title, author, genre, price, stock, publishedYear },
@@ -64,4 +65,22 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// ✅ DELETE BOOK (DELETE /api/books/:id)
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedBook = await Book.findByIdAndDelete(id);
+
+    if (!deletedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(200).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting book:", error.message);
+    res.status(500).json({ message: "Server error while deleting book" });
+  }
+});
+
 export default router;
+
